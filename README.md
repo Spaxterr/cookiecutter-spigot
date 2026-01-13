@@ -1,7 +1,7 @@
 # Spigot Plugin Template
 A [**Cookiecutter**](https://www.cookiecutter.io/) template for generating Spigot/Paper Minecraft plugin projects.
 
-Yhis template sets up a modern Java environment with industry-standard tooling for formatting, linting, and building Minecraft Spigot Plugins.
+This template sets up a modern Java environment with industry-standard tooling for formatting, linting, and building Minecraft Spigot Plugins.
 
 ## Features
 - **Build Systems:** Pre-configured **Maven** setup.
@@ -46,5 +46,5 @@ pmd check --rulesets ./pmd-rules.xml --dir ./src
 (given that PMD is installed as an executable)
 
 ---
-## ?? License
+## License
 [MIT](https://www.google.com/url?sa=E&q=LICENSE)
