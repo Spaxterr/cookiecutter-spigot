@@ -1,0 +1,181 @@
+<?xml version="1.0"?>
+<ruleset name="SpigotRules"
+    xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
+
+    <description>Comprehensive Spigot Plugin Ruleset</description>
+
+    <rule ref="category/java/bestpractices.xml">
+        <exclude name="SystemPrintln" />
+        <exclude name="JUnitTestsShouldIncludeAssert" />
+    </rule>
+
+    <rule ref="category/java/errorprone.xml">
+        <exclude name="BeanMembersShouldSerialize" />
+    </rule>
+
+    <rule ref="category/java/performance.xml" />
+
+    <rule ref="category/java/security.xml" />
+
+    <rule ref="category/java/codestyle.xml">
+        <exclude name="UnnecessaryModifier" />
+        <exclude name="EmptyControlStatement" />
+        <exclude name="ShortVariable" />
+        <exclude name="AtLeastOneConstructor" />
+        <exclude name="OnlyOneReturn" />
+        <exclude name="LongVariable" />
+        <exclude name="CallSuperInConstructor" />
+        <exclude name="CommentDefaultAccessModifier" />
+    </rule>
+
+    <rule ref="category/java/design.xml">
+        <exclude name="LawOfDemeter" />
+        <exclude name="LoosePackageCoupling" />
+        <exclude name="UseUtilityClass" />
+    </rule>
+
+    <rule ref="category/java/multithreading.xml">
+        <exclude name="DoNotUseThreads" />
+        <exclude name="UseConcurrentHashMap" />
+    </rule>
+
+    <rule ref="category/java/documentation.xml">
+        <exclude name="CommentRequired" />
+        <exclude name="CommentSize" />
+    </rule>
+
+    <!-- Allow System.out for plugin logging during development -->
+    <rule ref="category/java/bestpractices.xml/SystemPrintln">
+        <properties>
+            <property name="violationSuppressXPath"
+                value="//ClassOrInterfaceDeclaration[matches(@SimpleName, '.*Debug.*|.*Test.*')]"/>
+        </properties>
+    </rule>
+
+    <!-- Adjust complexity thresholds -->
+    <rule ref="category/java/design.xml/CyclomaticComplexity">
+        <properties>
+            <property name="methodReportLevel" value="15" />
+            <property name="classReportLevel" value="80" />
+        </properties>
+    </rule>
+
+    <rule ref="category/java/design.xml/CognitiveComplexity">
+        <properties>
+            <property name="reportLevel" value="20" />
+        </properties>
+    </rule>
+
+    <rule ref="category/java/design.xml/NPathComplexity">
+        <properties>
+            <property name="reportLevel" value="300" />
+        </properties>
+    </rule>
+
+    <rule ref="category/java/design.xml/ExcessiveMethodLength">
+        <properties>
+            <property name="minimum" value="150" />
+        </properties>
+    </rule>
+
+    <rule ref="category/java/design.xml/ExcessiveClassLength">
+        <properties>
+            <property name="minimum" value="1000" />
+        </properties>
+    </rule>
+
+    <rule ref="category/java/design.xml/TooManyMethods">
+        <properties>
+            <property name="maxmethods" value="25" />
+        </properties>
+    </rule>
+
+    <rule ref="category/java/design.xml/TooManyFields">
+        <properties>
+            <property name="maxfields" value="20" />
+        </properties>
+    </rule>
+
+    <rule ref="category/java/design.xml/ExcessiveParameterList">
+        <properties>
+            <property name="minimum" value="8" />
+        </properties>
+    </rule>
+
+    <rule ref="category/java/codestyle.xml/LongVariable">
+        <properties>
+            <property name="minimum" value="25" />
+        </properties>
+    </rule>
+
+    <rule ref="category/java/codestyle.xml/ShortVariable">
+        <properties>
+            <property name="minimum" value="2" />
+        </properties>
+    </rule>
+
+    <rule ref="category/java/codestyle.xml/ShortMethodName">
+        <properties>
+            <property name="minimum" value="3" />
+        </properties>
+    </rule>
+
+    <rule ref="category/java/design.xml/SignatureDeclareThrowsException">
+        <properties>
+            <property name="violationSuppressXPath"
+                value="//MethodDeclaration[@Public='true' and //Annotation//Name[@Image='EventHandler']]"/>
+        </properties>
+    </rule>
+
+    <!-- Allow unused parameters in event handlers -->
+    <rule ref="category/java/bestpractices.xml/UnusedFormalParameter">
+        <properties>
+            <property name="violationSuppressXPath"
+                value="//MethodDeclaration[//Annotation//Name[@Image='EventHandler']]"/>
+        </properties>
+    </rule>
+
+    <!-- Custom rule priorities -->
+    <rule ref="category/java/errorprone.xml/AvoidCatchingNPE">
+        <properties>
+            <property name="violationSuppressXPath"
+                value="//CatchStatement[ancestor::MethodDeclaration[//Annotation//Name[@Image='EventHandler']]]"/>
+        </properties>
+    </rule>
+
+    <!-- Naming conventions -->
+    <rule ref="category/java/codestyle.xml/ClassNamingConventions">
+        <properties>
+            <property name="classPattern" value="[A-Z][a-zA-Z0-9]*" />
+            <property name="abstractClassPattern" value="Abstract[A-Z][a-zA-Z0-9]*" />
+            <property name="interfacePattern" value="[A-Z][a-zA-Z0-9]*" />
+            <property name="enumPattern" value="[A-Z][a-zA-Z0-9]*" />
+            <property name="annotationPattern" value="[A-Z][a-zA-Z0-9]*" />
+            <property name="utilityClassPattern" value="[A-Z][a-zA-Z0-9]*" />
+        </properties>
+    </rule>
+
+    <!-- Avoid god classes in plugins -->
+    <rule ref="category/java/design.xml/GodClass">
+        <properties>
+            <property name="violationSuppressXPath"
+                value="//ClassOrInterfaceDeclaration[matches(@SimpleName, '.*Plugin$|.*Manager$|.*Handler$')]"/>
+        </properties>
+    </rule>
+
+    <!-- Allow literals in annotations (common in Spigot) -->
+    <rule ref="category/java/errorprone.xml/AvoidDuplicateLiterals">
+        <properties>
+            <property name="skipAnnotations" value="true" />
+            <property name="maxDuplicateLiterals" value="5" />
+        </properties>
+    </rule>
+
+    <rule ref="category/java/errorprone.xml/AvoidLiteralsInIfCondition">
+        <properties>
+            <property name="ignoreMagicNumbers" value="-1,0,1,2" />
+        </properties>
+    </rule>
+</ruleset>

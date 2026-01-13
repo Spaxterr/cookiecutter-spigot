@@ -1,0 +1,4 @@
+name: {{ cookiecutter.project_name }}
+version: {{ cookiecutter.version }}
+main: {{ cookiecutter.group_id }}.{{ cookiecutter.artifact_id.lower() }}.{{ cookiecutter.main_class_name }}
+api-version: {{ cookiecutter.spigot_api_version }}

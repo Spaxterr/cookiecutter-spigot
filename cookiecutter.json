@@ -1,0 +1,26 @@
+{
+    "project_name": "My Spigot Plugin",
+    "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '-') }}",
+    "group_id": "me.username",
+    "artifact_id": "{{ cookiecutter.project_name.replace(' ', '') }}",
+    "main_class_name": "MyPlugin",
+    "version": "1.0",
+    "spigot_version": "1.21.11-R0.1-SNAPSHOT",
+    "java_version": "21",
+    "spigot_api_version": "1.21",
+    "include_pmd": true,
+    "include_spotless": true,
+    "__prompts__": {
+        "project_name": "Human-readable name of plugin",
+        "project_slug": "Package name",
+        "group_id": "Group ID",
+        "artifact_id": "Artifact ID",
+        "main_class_name": "Main class name (excluding .java)",
+        "version": "Initial plugin version",
+        "spigot_version": "Spigot version",
+        "java_version": "Java Version",
+        "spigot_api_version": "Spigot API version",
+        "include_pmd": "Include PMD for linting",
+        "include_spotless": "Include spotless for formatting"
+    }
+}
